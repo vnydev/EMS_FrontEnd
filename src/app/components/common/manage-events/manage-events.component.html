@@ -1,0 +1,59 @@
+<div class="manage">
+  <h4>Total Events: {{EventContainer.length}} </h4>
+  <mat-accordion *ngFor="let event of EventContainer">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3>{{event.event_title}} </h3>
+        </mat-panel-title>
+        <mat-panel-description>
+          <h3>{{event.presenter_name}}</h3>
+        </mat-panel-description>
+        <mat-panel-description>
+          <button mat-raised-button color="warn" (click)="deleteEvent(event._id)" >Delete</button>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="event-details">
+        <table>
+          <tr>
+            <td>Event Title</td>
+            <td>{{event.event_title}} </td>
+          </tr>
+          <tr>
+            <td>Event Subject</td>
+            <td>{{event.subject}}</td>
+          </tr>
+          <tr>
+            <td>Event Description</td>
+            <td>{{event.description}}</td>
+          </tr>
+          <tr>
+            <td>Event Start-Date & End-Date & Time</td>
+            <td>{{event.StartDate | date:'dd-MMM-yyyy' }} To {{event.EndDate | date:'dd-MMM-yyyy'}} , {{event.Time}} 
+              <span *ngIf="event.Time < '12' ">AM</span>
+              <span *ngIf="event.Time >= '12' ">PM</span>
+            </td>
+          </tr>
+          <tr>
+            <td>Event Present By</td>
+            <td>{{event.presenter_name}}</td>
+          </tr>
+          <tr>
+            <td>Event Contact Details</td>
+            <td>{{event.event_contact.email}} , {{event.event_contact.phone_no}}</td>
+          </tr>
+          <tr>
+            <td>Event Address</td>
+            <td>
+              {{event.event_adress.address}}, {{event.event_adress.city}}
+              <br>
+              {{event.event_adress.pin_code}}, {{event.event_adress.country}}.
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

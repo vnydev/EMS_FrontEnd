@@ -1,0 +1,60 @@
+<!-- <button mat-raised-button (click)="isLinear = true" id="toggle-linear">Enable linear mode</button> -->
+<div class="login">
+  <form class="login-form">
+    <div class="" [ngClass]="{red:errMsg.updatePassword === 'Invalid username' || errMsg.authMsg === 'Invalid password' || errMsg.authMsg === 'Invalid username'}">
+    <h3 *ngIf="errMsg.updatePassword" >{{errMsg.updatePassword}}</h3>
+    <h3 *ngIf="errMsg.authMsg" >{{errMsg.authMsg}}</h3>
+  </div>
+    <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
+      <mat-step [stepControl]="userFormGroup">
+        <form [formGroup]="userFormGroup">
+          <ng-template matStepLabel>Username</ng-template>
+          <mat-form-field>
+            <input matInput placeholder="Username/Email" formControlName="username" required>
+            <mat-error *ngIf="userFormGroup.controls.username.invalid && (userFormGroup.controls.username.dirty || userFormGroup.controls.username.touched)">{{getErrorMessage() || this.errMsg.username}}</mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Next</button>
+            <button mat-button class="right"  routerLink="/register"  >New User</button>
+
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="pwdFormGroup">
+        <form [formGroup]="pwdFormGroup" (ngSubmit)="UserLogin(userFormGroup, pwdFormGroup)">
+          <ng-template matStepLabel *ngIf="!forgot_passd">Password</ng-template>
+          <mat-form-field *ngIf="!forgot_passd">
+            <input type="password" matInput placeholder="Password" formControlName="password" required>
+            <mat-error *ngIf="pwdFormGroup.controls.password.invalid && (pwdFormGroup.controls.password.dirty || pwdFormGroup.controls.password.touched)">{{getErrorMessage() || this.errMsg.password}}</mat-error>            
+          </mat-form-field>
+          <mat-form-field *ngIf="forgot_passd">
+            <input matInput placeholder="New Password" formControlName="newPassword" [type]="hide ? 'password' : 'text'">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            <mat-error *ngIf="pwdFormGroup.controls.newPassword.invalid && (pwdFormGroup.controls.newPassword.dirty || pwdFormGroup.controls.newPassword.touched)">{{getErrorMessage() || this.errMsg.newPassword}}</mat-error>            
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious  *ngIf="!forgot_passd">Back</button>
+            <button mat-button matStepperNext [disabled]="pwdFormGroup.controls.password.invalid"  *ngIf="!forgot_passd" >Login</button>
+            <button class="right" mat-button (click)="forgot_password(userFormGroup, pwdFormGroup)" [disabled]="pwdFormGroup.controls.newPassword.dirty && pwdFormGroup.controls.newPassword.invalid" >Forgot</button>
+            <button class="right" mat-button (click)="cancel()"  *ngIf="forgot_passd">Cancel</button>
+            
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        {{errMsg.authMsg}} &nbsp; &nbsp;
+        <button *ngIf="errMsg.authMsg" mat-button matStepperPrevious>Back</button>
+
+        <!-- <div class="button-row">
+          <button mat-raised-button color="primary" ()>Login</button>
+        </div> -->
+        <!-- <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Login</button>
+    </div> -->
+      </mat-step>
+    </mat-horizontal-stepper>
+  </form>
+</div>
+

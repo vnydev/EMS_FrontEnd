@@ -1,0 +1,43 @@
+<div class="main-register">
+  <form class="register-form" [formGroup]="newUserDetails" (ngSubmit)="OnSignUpNewUser(newUserDetails.value)">
+    <mat-form-field>
+        <input matInput placeholder="Enter your fullname" formControlName="name" required>
+          <mat-error *ngIf="newUserDetails.controls.name.invalid && (newUserDetails.controls.name.dirty || newUserDetails.controls.name.touched)">{{getErrorMessage() || this.errMsg.name}}</mat-error>
+          <!-- <div *ngIf="newUserDetails.controls['name'].invalid && (newUserDetails.controls['name'].dirty || newUserDetails.controls['name'].touched)" class="alert alert-danger">
+            <div *ngIf="newUserDetails.controls['name'].invalid">
+              Name is required.
+            </div>
+          </div> -->
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Enter your username" formControlName="username" required >
+      <mat-error *ngIf="newUserDetails.controls.username.invalid && (newUserDetails.controls.username.dirty || newUserDetails.controls.username.touched) && (getErrorMessage() || this.errMsg.username)">{{getErrorMessage() || this.errMsg.username}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Enter your email" formControlName="email" required>
+      <mat-error *ngIf="newUserDetails.controls.email.invalid && (newUserDetails.controls.email.dirty || newUserDetails.controls.email.touched)">{{getErrorMessage() || this.errMsg.email}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Enter your password" formControlName="password"  [type]="hide ? 'password' : 'text'" required>
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      <mat-error *ngIf="newUserDetails.controls.password.invalid && (newUserDetails.controls.password.dirty || newUserDetails.controls.password.touched)">{{getErrorMessage() || this.errMsg.password}}</mat-error>      
+    </mat-form-field>
+    <mat-radio-group class="radio" formControlName="user_type">
+      <!-- <mat-radio-button class="radioBtn" formControlName="user_type" value="Presenter">Presenter</mat-radio-button> -->
+      <!-- <mat-radio-button class="radioBtn" formControlName="user_type" value="Attendee">Attendee</mat-radio-button> -->
+      <mat-radio-button class="radioBtn" *ngFor="let type of signUpOption" [value]="type.id">
+        {{type.option}}
+      </mat-radio-button>
+
+      <mat-error *ngIf="newUserDetails.controls.user_type.invalid  && (newUserDetails.controls.user_type.dirty || newUserDetails.controls.user_type.touched)">{{getErrorMessage() || this.errMsg.user_type}}</mat-error>            
+    </mat-radio-group>
+        <small>Select anyone category.</small>
+    
+    <button type="submit" mat-raised-button color="primary" [disabled]="!newUserDetails.valid">Register</button>    
+    <!-- <div class="example-selected-value">Your favorite season is: {{favoriteSeason}}</div> -->
+    <div class="info">
+        <small>Already Register <a routerLink="/login" >Login</a>  </small>
+    </div>
+
+  </form>
+</div>

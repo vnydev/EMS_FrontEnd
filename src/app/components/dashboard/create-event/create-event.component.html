@@ -1,0 +1,119 @@
+<div class="create-event-main">
+  <!-- <app-common-form formHeading=""></app-common-form> -->
+  <div class="main-form">
+    <form class="common-form" [formGroup]="EventForm" (ngSubmit)="createNewEvent(EventForm)">
+      <h2>Create New Event </h2>
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td *ngIf="userDashboard.user_role == 1">
+           <app-input Placeholder="Presenter Name" icon="false"  [selectInputValue]="EventDetails.presenter_name" InputType="text"></app-input>
+          </td>
+          <td *ngIf="userDashboard.user_role == 3">
+            <mat-form-field>
+              <mat-select placeholder="Presenter Name" [formControl]="EventDetails.presenter_name" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let user of Allusers" [value]="user">
+                  {{user.email}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+           <app-input Placeholder="Event Title" icon="false"  [selectInputValue]="EventDetails.event_title" InputType="text"></app-input>
+          </td>
+        </tr>
+        <tr>
+          <td>
+           <app-input Placeholder="Subject" icon="false"  [selectInputValue]="EventDetails.subject" InputType="text"></app-input>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <textarea rows="4" cols="50" matInput placeholder="Event Description" [formControl]="EventDetails.description" required></textarea>
+            </mat-form-field>
+          </td>
+        </tr>
+        
+      </table>
+      <h4>Event venue & contact details </h4>
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <app-datepicker [Placeholder]="'Start Date'" [selectDate]="EventDetails.StartDate"></app-datepicker>
+          </td>
+          <td>
+            <app-datepicker [Placeholder]="'End Date'" [selectDate]="EventDetails.EndDate"></app-datepicker>
+          </td>
+          <td>
+            <app-time-picker [Placeholder]="'Event Time'"  [selectTime]="EventDetails.Time"></app-time-picker>
+          </td>
+        </tr>
+      </table>
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+           <app-input Placeholder="Email" icon="false"  [selectInputValue]="EventDetails.email" InputType="email"></app-input>
+              <!-- <mat-error *ngIf="newUserDetails.controls.email.ininvalid || (newUserDetails.controls.email.dirty || newUserDetails.controls.email.touched)">{{getErrorMessage() || this.errMsg.email}}</mat-error> -->
+          </td>
+          <td>
+           <app-input Placeholder="Phone Number" icon="true" iconName="Phone" [selectInputValue]="EventDetails.phone_no" InputType="text"></app-input>
+          </td>
+        </tr>
+        <tr>
+          <td>
+           <app-input Placeholder="City" icon="false"  [selectInputValue]="EventDetails.city" InputType="text"></app-input>
+          </td>
+          <td>
+           <app-input Placeholder="State" icon="false"  [selectInputValue]="EventDetails.state" InputType="text"></app-input>
+          </td>
+        </tr>
+        <tr>
+          <td>
+           <app-input Placeholder="Country" icon="false"  [selectInputValue]="EventDetails.country" InputType="text"></app-input>
+          </td>
+          <td>
+           <app-input Placeholder="Postal Code" icon="false"  [selectInputValue]="EventDetails.pin_code" InputType="text"></app-input>
+
+            <!-- <mat-form-field class="example-full-width">
+              <input matInput #postalCode maxlength="5" placeholder="Postal Code"  formControlName="pin_code">
+              <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+            </mat-form-field> -->
+          </td>
+        </tr>
+  
+      </table>
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <textarea matInput placeholder="Address" [formControl]="EventDetails.address" required></textarea>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td class="btn">
+            <button type="submit" mat-raised-button color="primary" 
+            [disabled]=" EventDetails.presenter_name.invalid
+            || EventDetails.event_title.invalid
+            || EventDetails.subject.invalid
+            || EventDetails.description.invalid
+            || EventDetails.StartDate.invalid 
+            || EventDetails.EndDate.invalid 
+            || EventDetails.Time.invalid 
+            || EventDetails.email.invalid 
+            || EventDetails.phone_no.invalid 
+            || EventDetails.city.invalid 
+            || EventDetails.state.invalid 
+            || EventDetails.country.invalid 
+            || EventDetails.pin_code.invalid 
+            || EventDetails.address.invalid 
+            ">Create Event</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>

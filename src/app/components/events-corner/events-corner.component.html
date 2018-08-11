@@ -1,0 +1,76 @@
+<div class="events">
+  <mat-card class="example-card" *ngFor="let event of EventContainer">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header">
+        {{event.StartDate | date:'dd'}}
+        <br>{{event.StartDate | date:'MMM'}}
+      </div>
+      <mat-card-title>{{event.event_title}}</mat-card-title>
+      <mat-card-subtitle>{{event.subject}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="assets/images/event_leader.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <div class="des">
+        <p>
+          {{event.description}}
+        </p>
+      </div>
+      <div class="dateTime">
+        <small>Event Date & Time</small>&nbsp;
+        <b> {{event.StartDate | date:'dd MMM yyyy'}}, {{event.Time}}
+          <span *ngIf="event.Time < '12' ">AM</span>
+          <span *ngIf="event.Time >= '12' ">PM</span>
+        </b>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-icon-button color="accent" (click)="likeEvent(event._id)">
+        <mat-icon [matBadge]="event.post.like" aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+      </button>
+      <button mat-button class="interest" (click)="registerForEvent(event._id)">Interested</button>
+      <!-- <app-dailog-box></app-dailog-box> -->
+      <div class="use-register" *ngIf="isUserRegiter && event._id == eventId">
+        <form class="common-form" (ngSubmit)="registerForEvent(event._id)">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Email" type="email" [formControl]="useremail">
+              </mat-form-field>
+          <!-- <app-input Placeholder="Email" icon="false" [selectInputValue]="useremail" InputType="email"></app-input> -->
+          <button [disabled]="useremail.errors" mat-button class="interest">Register</button>
+        </form>
+      </div>
+    </mat-card-actions>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h2> Event Details</h2>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div *ngIf="event.event_adress && event.event_contact">
+          <table>
+            <tr>
+              <td>
+                <span class="Contact">Presenter:-</span> {{event.presenter_name}}</td>
+            </tr>
+            <tr>
+              <td class="Contact"> Event Address & Contact</td>
+            </tr>
+            <tr>
+              <td> {{event.event_adress.address}}, {{event.event_adress.city}}
+                <br> {{event.event_adress.pin_code}}, {{event.event_adress.country}}.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {{event.event_contact.email}}
+                <br> {{event.event_contact.phone_no}}
+              </td>
+            </tr>
+          </table>
+        </div>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card>
+</div>

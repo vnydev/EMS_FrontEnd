@@ -1,0 +1,36 @@
+<!-- <mat-toolbar color="primary" class="example-toolbar"> -->
+    <!-- <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button> -->
+    <!-- <h1 class="example-app-name">Responsive App</h1> -->
+<!-- </mat-toolbar> -->
+<mat-sidenav-container class="example-container">
+  <mat-sidenav-content>
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-sidenav-content>
+  <mat-sidenav #sidenav mode="side">
+    <mat-list *ngFor="let l of Navlist">
+      <mat-list-item  *ngIf="(UserProfileDetails.user_role == 1 || UserProfileDetails.user_role == 3 )&& l.link === 'create-event'" >
+        <h4 mat-subheader ><a (click)="childView(l.link)" [routerLink] = "[ l.link ]"> {{l.name}}</a></h4>
+      </mat-list-item>
+      <mat-list-item  *ngIf="UserProfileDetails.user_role == 1 && l.link !== 'create-event'" >
+          <h4 mat-subheader ><a (click)="childView(l.link)" [routerLink] = "[ l.link ]"> {{l.name}}</a></h4>
+      </mat-list-item>
+      <mat-list-item  *ngIf="UserProfileDetails.user_role != 1 && l.link !== 'create-event'" >
+          <h4 mat-subheader ><a (click)="childView(l.link)" [routerLink] = "[ l.link ]"> {{l.name}}</a></h4>
+      </mat-list-item>
+        <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
+
+       <!-- <h4 mat-line>{{folder.name}}</h4> -->
+        <!-- <p mat-line> {{folder.updated | date}} </p> -->
+      <!-- <mat-divider></mat-divider>
+      <h3 mat-subheader>Notes</h3>
+      <mat-list-item *ngFor="let note of notes">
+        <mat-icon mat-list-icon>note</mat-icon>
+        <h4 mat-line>{{note.name}}</h4>
+        <p mat-line> {{note.updated | date}} </p>
+      </mat-list-item> -->
+    </mat-list>
+  </mat-sidenav>
+</mat-sidenav-container>
+<!-- <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button> -->

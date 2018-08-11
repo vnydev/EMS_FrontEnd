@@ -1,0 +1,16 @@
+.about-us{
+    width: 90%;
+    height: 100%;
+    padding: 5%;
+    overflow: auto;
+  }
+.about-us p{
+    font-size: 16px;
+    color: #c8c8c8;
+    font-weight: 300;
+}
+.about-us p b{
+    font-size: 20px;
+    color:#c8c8c8;
+    font-weight: 600;
+}

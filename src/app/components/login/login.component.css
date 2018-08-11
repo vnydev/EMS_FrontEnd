@@ -1,0 +1,37 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.login{
+    width: 100%;
+    height: 100%;
+}
+.login-form {
+    width: 60%;
+    height: 100%;
+    display: inline-grid;
+    margin: 10%;
+    margin-left: 18%;
+    padding: 5%;
+    background-color: #527169;
+  }
+.mat-stepper-horizontal{
+    background-color: transparent !important;
+}
+.mat-step-header .mat-step-icon{
+    background-color: #a29743 !important;;
+}
+.mat-step-header .mat-step-icon-not-touched{
+    background-color: rgba(0,0,0,0.15) !important;
+
+}
+.right{
+    float: right;
+}
+
+h3{
+    text-align: center;
+    color: #40b940;
+    font-weight: bold
+}
+ .red h3{
+    color: #da4f4f !important;
+}

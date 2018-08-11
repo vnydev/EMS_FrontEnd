@@ -1,0 +1,24 @@
+<div class="profile">
+    <div class="user">
+        <img src="assets/images/default_4.png" alt="Photo of a Shiba Inu">
+      <table>
+        <tr>
+          <td>Name</td>
+          <td>{{UserProfileDetails.name}} </td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>{{UserProfileDetails.email}}</td>
+        </tr>
+        <tr>
+          <td>Username</td>
+          <td>{{UserProfileDetails.username}}</td>
+        </tr>
+        <tr>
+          <td>User Role</td>
+          <td *ngIf="UserProfileDetails.user_role == 1"> Presenter</td>
+          <td *ngIf="UserProfileDetails.user_role == 2"> Attendee</td>
+        </tr>
+      </table>
+    </div>
+</div>

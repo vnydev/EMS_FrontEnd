@@ -1,0 +1,15 @@
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="Startpicker" [placeholder]="Placeholder" [formControl]="selectDate" required>
+    <mat-datepicker-toggle matSuffix [for]="Startpicker"></mat-datepicker-toggle>
+    <mat-datepicker #Startpicker></mat-datepicker>
+  </mat-form-field>
+  
+  <!-- <mat-form-field>
+    <input matInput [matDatepicker]="Endpicker" placeholder="End Date" [formControl]="EndDate">
+    <mat-datepicker-toggle matSuffix [for]="Endpicker"></mat-datepicker-toggle>
+    <mat-datepicker #Endpicker></mat-datepicker>
+  </mat-form-field> -->
+ 
+  <!-- <p class="msg" [ngClass]="{'has-danger':(StartDate.invalid && (StartDate.dirty || StartDate.touched)) || (EndDate.invalid && (EndDate.dirty || EndDate.touched))}"
+    *ngIf="(StartDate.invalid && StartDate.dirty) || (EndDate.invalid && EndDate.dirty)">Please choose vaild date string char not allow.</p> -->

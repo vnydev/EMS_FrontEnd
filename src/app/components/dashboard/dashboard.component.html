@@ -1,0 +1,10 @@
+<!-- <div class="leftNav">
+    <app-left-nav></app-left-nav>
+</div> -->
+<app-left-nav></app-left-nav>
+<div class="dashboard">
+    <h2>
+        {{userDashboard.name}} <span *ngIf="userDashboard.user_role == 3">Admin</span> Dashboard
+    </h2>
+    <router-outlet></router-outlet>
+</div>
